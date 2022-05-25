@@ -13,9 +13,7 @@ var second = 0;
 digitHour.innerHTML="0"+hour;
 digitMinute.innerHTML="0"+minute;
 digitHour.innerHTML="0"+hour.toString();
-const d = new Date();
-let dhour = d.getHours();
-console.log(dhour);
+
 setInterval(function() {
     secondDegree+=6;
     second++;
