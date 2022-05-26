@@ -1,2 +1,2 @@
 # Analog and digital clocks with HTML, CSS and JavaScript
-![change-background-color](analog_and_digital_clock_not_related_current_time.gif "Making analog and digital clocks with html, css and js not related to current time")
+![change-background-color](analog_and_digital_clock.gif "Making analog and digital clocks with html, css and js")
