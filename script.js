@@ -11,10 +11,6 @@ var currentDate = new Date();
 var hour=currentDate.getHours();
 var minute=currentDate.getMinutes();
 var second = currentDate.getSeconds();
-digitHour.innerHTML=hour;
-digitMinute.innerHTML=minute;
-digitSecond.innerHTML=second;
-updateHands();
 
 function changeDigitHourToAnalogHour(h, m){
     var hourDegree =(h*30)+(m*0.5);
@@ -29,52 +25,36 @@ function changeDigitSecondToAnalogSecond(second) {
     var degree = second*6;
     return degree;
 }
+function showDigits(){
+    digitHour.innerHTML=hour<10?"0"+hour:hour;
+    digitMinute.innerHTML=minute<10?"0"+minute:minute;
+    digitSecond.innerHTML=second<10?"0"+second:second;
+}
 
-
-function updateHands(){
+function showAnalog(){
     secondHand.style.transform ="rotate(" +changeDigitSecondToAnalogSecond(second)+"deg)";
     minuteHand.style.transform ="rotate(" +changeDigitMinuteToAnalogMinute(minute)+"deg)";
     hourHand.style.transform ="rotate(" +changeDigitHourToAnalogHour(hour,minute)+"deg)";
 }
-setInterval(function() {
+
+function run(){
     secondDegree+=6;
     second++;
-    digitSecond.innerHTML=second.toString();
-   updateHands();
-    
-    if(second<10){
-        digitSecond.innerHTML="0"+second.toString();
-    }else if(second<=59){
-        digitSecond.innerHTML=second.toString();
-    }else{
+    if(second >59){
         second=0;
         minute++;
         minuteDegree+=6;
         hourDegree+=0.5;
-        digitSecond.innerHTML="0"+second.toString();
-        updateHands();
-        if(minute<10){
-            digitMinute.innerHTML="0"+minute.toString();
-        }
-        else if(minute<=59){
-            digitMinute.innerHTML=minute.toString();
-        }
-        else{
+ 
+        if(minute>59){
             minute=0;
             hour++;
-            digitMinute.innerHTML="0"+minute.toString();
-            if(hour<10){
-                digitHour.innerHTML="0"+hour.toString();
-            }
-            else if(hour<=23){
-                digitHour.innerHTML=hour.toString();
-            }
-            else{
-                hour=0;
-                digitHour.innerHTML="0"+hour.toString();
-                
+            if(hour>23){
+                hour=0;                
             }
         }
     }
-    
-},1000);
+    showDigits();
+    showAnalog();
+}
+setInterval(run, 1000);
